@@ -52,7 +52,7 @@ class LTaskPredict(luigi.Task):
     data_dir = luigi.Parameter(default='./data', description="Базовая директория для данных, все промежуточные файлы сохраняются там")
     features_path = luigi.Parameter(default='', description="Файл с дополнительными признаками для предсказаний. По умолчанию <data_dir>/features.csv")
     input_path = luigi.Parameter(default='', description="Файл с входными данными для предсказаний, без доп. признаков. По умолчанию <data_dir>/data_test.csv")
-    output_path = luigi.Parameter(default='', description="Файл результата. По умолчанию <data_dir>/predictions.csv")
+    output_path = luigi.Parameter(default='', description="Файл результата. По умолчанию <data_dir>/answers_test.csv")
     pipeline_path = luigi.Parameter(default='./model/default.pkl', description="Pickle-файл с пайплайном модели. По умолчанию model/default.pkl")
     threshold = luigi.FloatParameter(default=0.2, description="Порог вероятности для предсказания target=1. По умолчанию 0.2")
 
@@ -65,7 +65,7 @@ class LTaskPredict(luigi.Task):
     def get_output_path(self):
         output_path = self.output_path
         if not output_path:
-            output_path = self.data_dir + '/predictions.csv'
+            output_path = self.data_dir + '/answers_test.csv'
         return output_path
 
     def output(self):

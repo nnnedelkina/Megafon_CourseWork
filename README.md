@@ -19,7 +19,7 @@ docker build -t nnn/megafon_project .
 
 Или явное использование docker run по мотивам ./run.sh (одна строка).
 
-После запуска должен появиться data/predictions.csv
+После запуска должен появиться data/answers_test.csv
 
 run.sh прозрачно передает все параметры в luigi. run.sh использует local scheduler. run.sh использует тэг образа nnn/megafon project.
 
@@ -45,7 +45,7 @@ run.sh прозрачно передает все параметры в luigi. r
  * data_dir - Базовая директория для данных, все промежуточные файлы сохраняются там. По умолчанию ./data.
  * input_path - Файл с входными данными для предсказаний, без доп. признаков. По умолчанию <data_dir>/data_test.csv.
  * features_path - Файл с дополнительными признаками для предсказаний. По умолчанию <data_dir>/features.csv.
- * output_path - Файл результата. По умолчанию <data_dir>/predictions.csv.
+ * output_path - Файл результата. По умолчанию <data_dir>/answers_test.csv.
  * pipeline_path - Pickle-файл с пайплайном модели. По умолчанию model/default.pkl.
  * threshold - Порог вероятности для предсказания target=1. По умолчанию 0.2.
 
@@ -85,11 +85,5 @@ weighted avg       0.93      0.87      0.89     83166
 
 Финальная модель в model/default.pkl
 
-
-
-
-## TODO:
- 
- * презентация
 
 
