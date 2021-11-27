@@ -25,7 +25,7 @@ docker build -t nnn/megafon_project .
 
 После запуска должен появиться data/answers_test.csv
 
-run.sh прозрачно передает все параметры в luigi. run.sh использует local scheduler. run.sh использует тэг образа nnn/megafon project.
+run.sh прозрачно передает все параметры в luigi.  run.sh использует local scheduler.  run.sh использует тэг docker-образа nnn/megafon.
 
 Для запуска не из под docker надо обеспечить установку всех нужных пакетов python из requirements.txt
 
