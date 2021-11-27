@@ -49,12 +49,12 @@ class LTaskAddFeatures(luigi.Task):
     
 class LTaskPredict(luigi.Task):
 
-    data_dir = luigi.Parameter(default='data')
-    features_path = luigi.Parameter(default='')
-    input_path = luigi.Parameter(default='')
-    output_path = luigi.Parameter(default='')
-    pipeline_path = luigi.Parameter(default='model/default.pkl')
-    threshold = luigi.Parameter(default="0.2")
+    data_dir = luigi.Parameter(default='./data', description="Базовая директория для данных, все промежуточные файлы сохраняются там")
+    features_path = luigi.Parameter(default='', description="Файл с дополнительными признаками для предсказаний. По умолчанию <data_dir>/features.csv")
+    input_path = luigi.Parameter(default='', description="Файл с входными данными для предсказаний, без доп. признаков. По умолчанию <data_dir>/data_test.csv")
+    output_path = luigi.Parameter(default='', description="Файл результата. По умолчанию <data_dir>/predictions.csv")
+    pipeline_path = luigi.Parameter(default='./model/default.pkl', description="Pickle-файл с пайплайном модели. По умолчанию model/default.pkl")
+    threshold = luigi.FloatParameter(default=0.2, description="Порог вероятности для предсказания target=1. По умолчанию 0.2")
 
     def get_input_path(self):
         input_path = self.input_path
@@ -84,7 +84,7 @@ class LTaskPredict(luigi.Task):
         print("Получаем предсказания ...")
         y_proba = pipeline.predict_proba(df_input)[:,1]
 
-        threshold = float(self.threshold)
+        threshold = self.threshold
         df_output = df_input[['buy_time', 'id', 'vas_id']].copy()
         df_output['target'] = y_proba > threshold
         df_output['probabilities'] = y_proba
